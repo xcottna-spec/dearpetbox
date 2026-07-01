@@ -26,6 +26,10 @@ const config: Config = {
         parchment: "var(--color-parchment)",
         cream: "var(--color-white)",
         borderk: "var(--color-border)",
+        gold: {
+          DEFAULT: "var(--color-gold)",
+          light: "var(--color-gold-l)",
+        },
       },
       fontFamily: {
         brand: ["var(--font-playfair)", "Playfair Display", "serif"],

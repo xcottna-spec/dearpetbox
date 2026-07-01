@@ -1,6 +1,15 @@
 import { REVIEWS, SUBSCRIBER_COUNT } from "@/data/reviews";
 import Reveal from "@/components/ui/Reveal";
 
+const AVATARS = [
+  "photo-1583511655857-d19b40a7a54e",
+  "photo-1597633425046-08f5110420b5",
+  "photo-1517849845537-4d257902454a",
+  "photo-1518717758536-85ae29035b6d",
+  "photo-1568393691622-c7ba131d63b4",
+  "photo-1593134257782-e89567b7718a",
+];
+
 function Stars({ n }: { n: number }) {
   return (
     <span aria-label={`별점 ${n}점`} className="text-stamp">
@@ -24,9 +33,14 @@ export default function ReviewSection() {
             <Reveal key={r.id} delay={(i % 3) * 0.1}>
               <figure className="flex h-full flex-col rounded-lg border-2 border-borderk bg-cream p-6 shadow-kraft-sm">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-kraft-light text-lg">
-                    🐶
-                  </div>
+                  <div
+                    className="h-11 w-11 shrink-0 rounded-full border border-borderk bg-kraft-light bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url('https://images.unsplash.com/${AVATARS[i % AVATARS.length]}?w=120&q=70&auto=format&fit=crop')`,
+                    }}
+                    role="img"
+                    aria-label={`${r.dogName} 사진`}
+                  />
                   <div>
                     <div className="font-bold text-ink">{r.dogName}</div>
                     <Stars n={r.rating} />

@@ -23,11 +23,16 @@ export default function ProductPreview() {
     <section className="bg-cream py-20">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2">
         <div className="relative">
-          <div className="texture-kraft flex aspect-[4/3] items-center justify-center rounded-2xl border-2 border-borderk bg-kraft-light shadow-kraft">
-            <span className="font-brand text-2xl font-bold text-kraft-dark">
-              Monthly Box
-            </span>
-          </div>
+          <div
+            className="aspect-[4/3] rounded-2xl border-2 border-borderk bg-cover bg-center shadow-kraft"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1597633425046-08f5110420b5?w=900&q=80&auto=format&fit=crop')",
+              backgroundPosition: "center 35%",
+            }}
+            role="img"
+            aria-label="맞춤 간식을 기다리는 반려견"
+          />
           <div className="absolute -bottom-4 -left-3">
             <StampBadge rotate="left">10종 큐레이션 · 매달 새 구성</StampBadge>
           </div>

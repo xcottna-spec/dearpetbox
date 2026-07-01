@@ -21,6 +21,8 @@
   --color-parchment: #F5EDD8;
   --color-white: #FDFAF5;
   --color-border: #D4B896;
+  --color-gold: #B79152;
+  --color-gold-l: #D9BB7C;
 }
 
 @layer base {
@@ -54,12 +56,23 @@
     background-position: 0 0, 2px 3px;
     background-blend-mode: multiply;
   }
-  /* Flat vintage offset shadow */
+  /* Flat vintage offset shadow (softened blend: half offset + soft ambient) */
   .shadow-kraft {
-    box-shadow: 4px 4px 0px var(--color-kraft-dark);
+    box-shadow: 3px 3px 0px var(--color-gold), 0 18px 40px -20px rgba(44, 24, 16, 0.35);
   }
   .shadow-kraft-sm {
-    box-shadow: 3px 3px 0px var(--color-kraft-dark);
+    box-shadow: 2px 2px 0px var(--color-gold-l), 0 12px 26px -16px rgba(44, 24, 16, 0.28);
+  }
+  .shadow-soft {
+    box-shadow: 0 22px 50px -24px rgba(44, 24, 16, 0.45);
+  }
+  .text-gold {
+    color: var(--color-gold);
+  }
+  /* warm serif emphasis (blends previous editorial gold accent) */
+  .accent {
+    color: var(--color-gold);
+    font-style: normal;
   }
   .font-brand {
     font-family: var(--font-playfair), 'Playfair Display', serif;
