@@ -28,9 +28,9 @@ export default function EditorialBand() {
               <span className="accent">아이를 아는 일</span>입니다.
             </h2>
             <p className="mt-5 text-ink-light">
-              디어펫은 매달 우리 아이의 반응을 데이터로 기억합니다. 남긴 간식,
-              잘 먹은 간식, 알레르기 신호까지 — 박스를 거듭할수록 프로파일은
-              선명해지고, 다음 박스는 오늘보다 더 정확해집니다.
+              남긴 간식, 잘 먹은 간식, 알레르기 신호까지 기억해요.
+              <br />
+              박스를 거듭할수록, 다음 박스는 더 정확해집니다.
             </p>
             <ul className="mt-6 space-y-2 text-ink">
               <li className="flex items-center gap-3">

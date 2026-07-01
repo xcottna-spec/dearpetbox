@@ -5,25 +5,25 @@ const STEPS = [
     n: "01",
     icon: "🖊",
     title: "3분 맞춤 진단",
-    desc: "알레르기 성분, 좋아하는 맛, 건강 고민까지. 한 번 입력하면 매달 자동으로 반영됩니다.",
+    desc: "한 번 입력하면 매달 자동으로 반영돼요.",
   },
   {
     n: "02",
     icon: "✉",
     title: "수제 간식 10종 큐레이션",
-    desc: "반려견 프로파일에 맞게, 국내 소규모 공방에서 직접 만든 간식으로 구성합니다.",
+    desc: "국내 공방에서 직접 만든 간식으로 맞춤 구성.",
   },
   {
     n: "03",
     icon: "📦",
     title: "매달 우리 집 앞으로",
-    desc: "배송 전 카카오톡으로 구성을 먼저 알려드립니다. 마음에 안 드는 간식은 반품하고 포인트로 돌려받으세요.",
+    desc: "배송 전 카톡 안내, 안 맞으면 반품해 포인트로.",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="texture-kraft bg-kraft-light py-20">
+    <section id="how" className="bg-kraft-light py-20">
       <div className="mx-auto max-w-6xl px-5">
         <h2 className="text-center text-section font-bold text-ink">
           디어펫은 이렇게 합니다

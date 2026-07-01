@@ -10,17 +10,19 @@
   --font-noto-serif-kr: 'Noto Serif KR';
   --font-playfair: 'Playfair Display';
 
-  --color-kraft: #C4A882;
-  --color-kraft-light: #EDE0CC;
+  /* 에디토리얼 럭셔리 — 에스프레소 · 골드 · 아이보리 */
+  --color-espresso: #17120B;
+  --color-kraft: #B79152;
+  --color-kraft-light: #ECE3CF;
   --color-kraft-dark: #8B6F47;
-  --color-ink: #2C1810;
-  --color-ink-light: #4A3728;
-  --color-stamp: #8B2500;
-  --color-stamp-hover: #6B1C00;
-  --color-leaf: #4A6741;
-  --color-parchment: #F5EDD8;
-  --color-white: #FDFAF5;
-  --color-border: #D4B896;
+  --color-ink: #241D12;
+  --color-ink-light: #6A5A44;
+  --color-stamp: #17120B;
+  --color-stamp-hover: #2C2114;
+  --color-leaf: #6E6244;
+  --color-parchment: #F3ECDD;
+  --color-white: #FAF6EC;
+  --color-border: #E4D8C0;
   --color-gold: #B79152;
   --color-gold-l: #D9BB7C;
 }
@@ -56,15 +58,15 @@
     background-position: 0 0, 2px 3px;
     background-blend-mode: multiply;
   }
-  /* Flat vintage offset shadow (softened blend: half offset + soft ambient) */
+  /* 그림자 최소화 — 얇은 앰비언트만 (AI틱한 오프셋 그림자 제거) */
   .shadow-kraft {
-    box-shadow: 3px 3px 0px var(--color-gold), 0 18px 40px -20px rgba(44, 24, 16, 0.35);
+    box-shadow: 0 10px 30px -26px rgba(23, 18, 11, 0.4);
   }
   .shadow-kraft-sm {
-    box-shadow: 2px 2px 0px var(--color-gold-l), 0 12px 26px -16px rgba(44, 24, 16, 0.28);
+    box-shadow: none;
   }
   .shadow-soft {
-    box-shadow: 0 22px 50px -24px rgba(44, 24, 16, 0.45);
+    box-shadow: 0 18px 50px -30px rgba(23, 18, 11, 0.5);
   }
   .text-gold {
     color: var(--color-gold);

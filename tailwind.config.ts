@@ -44,6 +44,16 @@ const config: Config = {
         kraft: "4px 4px 0px var(--color-kraft-dark)",
         "kraft-sm": "3px 3px 0px var(--color-kraft-dark)",
       },
+      borderRadius: {
+        // 전역적으로 모서리를 날카롭게(에디토리얼) — pill(full)만 유지
+        sm: "2px",
+        DEFAULT: "2px",
+        md: "3px",
+        lg: "3px",
+        xl: "4px",
+        "2xl": "4px",
+        "3xl": "6px",
+      },
     },
   },
   plugins: [],

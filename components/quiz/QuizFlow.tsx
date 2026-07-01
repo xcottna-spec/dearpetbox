@@ -40,7 +40,7 @@ const initialState: QuizState = {
   textures: [],
   flavors: [],
   healthGoals: [],
-  plan: "quarterly",
+  plan: "B",
 };
 
 type Action =
@@ -119,8 +119,8 @@ export default function QuizFlow() {
     setPaying(true);
     setPayMsg("");
     const res = await requestSubscriptionPayment({
-      orderName: `디어펫 박스 · ${name} · ${selectedPlan.name}`,
-      totalAmount: selectedPlan.totalPrice,
+      orderName: `디어펫 박스 · ${name} · ${selectedPlan.grade}등급 ${selectedPlan.name}`,
+      totalAmount: selectedPlan.price,
       customerName: name,
       customerEmail: email,
       customerPhone: phone,
@@ -377,16 +377,17 @@ export default function QuizFlow() {
                     state.plan === p.id ? "border-stamp bg-stamp/5 shadow-kraft-sm" : "border-borderk bg-cream"
                   }`}
                 >
-                  <div>
-                    <div className="font-bold text-ink">
-                      {p.name} {p.badge && <span className="ml-1 text-xs text-stamp">· {p.badge}</span>}
-                    </div>
-                    <div className="text-sm text-ink-light">
-                      총 {p.totalPrice.toLocaleString()}원 · {p.billingLabel}
+                  <div className="flex items-center gap-3">
+                    <span className="font-brand text-2xl font-bold text-gold">{p.grade}</span>
+                    <div>
+                      <div className="font-bold text-ink">
+                        {p.name} {p.badge && <span className="ml-1 text-xs text-gold">· {p.badge}</span>}
+                      </div>
+                      <div className="text-sm text-ink-light">{p.tagline}</div>
                     </div>
                   </div>
                   <div className="font-serif-kr text-lg font-bold">
-                    {p.monthlyPrice.toLocaleString()}원<span className="text-xs font-normal">/월</span>
+                    {p.price.toLocaleString()}원<span className="text-xs font-normal">/월</span>
                   </div>
                 </button>
               ))}
@@ -402,10 +403,10 @@ export default function QuizFlow() {
             <div className="mt-6 rounded-lg border-2 border-borderk bg-cream p-6 shadow-kraft-sm">
               <SummaryRow label="반려견">{name}</SummaryRow>
               <SummaryRow label="플랜">
-                {PLANS.find((p) => p.id === state.plan)?.name}
+                {selectedPlan?.grade}등급 · {selectedPlan?.name}
               </SummaryRow>
               <SummaryRow label="결제 금액">
-                {PLANS.find((p) => p.id === state.plan)?.totalPrice.toLocaleString()}원
+                {selectedPlan?.price.toLocaleString()}원 / 월
               </SummaryRow>
             </div>
             <div className="mt-6 space-y-3">

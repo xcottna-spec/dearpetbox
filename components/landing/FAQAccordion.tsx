@@ -15,7 +15,7 @@ export default function FAQAccordion() {
   };
 
   return (
-    <section className="bg-cream py-20">
+    <section id="faq" className="bg-cream py-20">
       <div className="mx-auto max-w-3xl px-5">
         <h2 className="text-center text-section font-bold text-ink">
           자주 묻는 질문

@@ -2,14 +2,13 @@ import Button from "@/components/ui/Button";
 
 export default function FinalCTA() {
   return (
-    <section className="texture-kraft bg-kraft py-20">
+    <section className="bg-kraft-light py-20">
       <div className="mx-auto max-w-3xl px-5 text-center">
         <h2 className="text-section font-bold text-ink">
-          시작은 3분짜리 진단 하나입니다.
+          시작은 3분짜리 진단 하나.
         </h2>
         <p className="mt-4 text-lg text-ink-light">
-          반려견의 알레르기, 취향, 건강 고민을 입력하면 디어펫이 나머지를 전부
-          챙겨드립니다.
+          알레르기·취향·건강만 알려주세요. 나머지는 디어펫이.
         </p>
         <div className="mt-8 flex justify-center">
           <Button href="/quiz" withArrow>

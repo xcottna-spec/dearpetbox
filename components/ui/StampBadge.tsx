@@ -11,10 +11,10 @@ export default function StampBadge({
   rotate = "left",
   className = "",
 }: StampBadgeProps) {
-  const rot = rotate === "left" ? "-rotate-[8deg]" : "rotate-[8deg]";
+  void rotate;
   return (
     <span
-      className={`font-brand inline-flex items-center justify-center rounded-full border-2 border-stamp px-4 py-2 text-sm font-bold uppercase tracking-wide text-stamp ${rot} ${className}`}
+      className={`font-brand inline-flex items-center justify-center border border-gold bg-cream px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-gold ${className}`}
     >
       {children}
     </span>

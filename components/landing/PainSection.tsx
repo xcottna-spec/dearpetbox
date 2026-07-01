@@ -2,18 +2,9 @@ import KraftCard from "@/components/ui/KraftCard";
 import Reveal from "@/components/ui/Reveal";
 
 const CARDS = [
-  {
-    emoji: "😰",
-    text: "성분표를 다 읽어도 어디서 반응이 생길지 모르겠어서 결국 유명 브랜드 간식만 반복해서 사고 있어요.",
-  },
-  {
-    emoji: "😔",
-    text: "처음엔 잘 먹던 간식을 어느 날 갑자기 외면해서 뜯지도 않은 포장지가 서랍에 쌓여 있어요.",
-  },
-  {
-    emoji: "🤔",
-    text: "'자연산', '무첨가'라고 써있는데 정확히 뭐가 들었는지 알 수 없어서 불안해요.",
-  },
+  { emoji: "😰", text: "성분표를 아무리 읽어도 불안해, 결국 늘 사던 것만 반복해요." },
+  { emoji: "😔", text: "잘 먹던 간식을 갑자기 외면해, 뜯지도 않은 포장이 쌓여요." },
+  { emoji: "🤔", text: "‘무첨가’라는데, 정작 뭐가 들었는지 알 수가 없어요." },
 ];
 
 export default function PainSection() {

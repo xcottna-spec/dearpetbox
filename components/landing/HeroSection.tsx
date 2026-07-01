@@ -43,7 +43,7 @@ export default function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pt-24">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pt-10">
         <motion.div
           variants={container}
           initial="hidden"
@@ -67,11 +67,11 @@ export default function HeroSection() {
           </motion.h1>
           <motion.p
             variants={item}
-            className="mt-6 max-w-lg text-lg text-parchment/90"
+            className="mt-6 max-w-md text-lg text-parchment/90"
           >
-            알레르기 성분은 빼고, 좋아하는 맛은 넣어서 — 매달 딱 맞는 수제 간식
-            10종을 보내드립니다. 마음에 안 들면 반품하세요. 그 피드백으로 다음
-            박스는 더 잘 맞아집니다.
+            알레르기는 빼고, 좋아하는 맛만 담은 수제 간식 10종.
+            <br />
+            매달, 우리 아이에게 딱 맞게.
           </motion.p>
           <motion.div
             variants={item}

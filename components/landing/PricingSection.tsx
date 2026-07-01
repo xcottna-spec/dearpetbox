@@ -5,36 +5,54 @@ export default function PricingSection() {
   return (
     <section id="pricing" className="bg-cream py-20">
       <div className="mx-auto max-w-6xl px-5">
-        <h2 className="text-center text-section font-bold text-ink">
-          어떤 방식으로 받아보실래요?
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          Subscription
+        </p>
+        <h2 className="mt-3 text-center text-section font-bold text-ink">
+          A·B·C, 우리 아이 등급을 고르세요
         </h2>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">
           {PLANS.map((p) => (
             <div
               key={p.id}
-              className={`relative flex flex-col rounded-lg border-2 bg-cream p-8 ${
+              className={`relative flex flex-col border bg-cream p-8 ${
                 p.highlight
-                  ? "border-stamp shadow-kraft md:-translate-y-2"
-                  : "border-borderk shadow-kraft-sm"
+                  ? "border-gold shadow-kraft md:-translate-y-2"
+                  : "border-border"
               }`}
             >
               {p.badge && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-stamp px-3 py-1 text-xs font-bold text-cream">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink px-3 py-1 text-xs font-bold tracking-widest text-cream">
                   {p.badge}
                 </span>
               )}
-              <h3 className="text-xl font-bold text-ink">{p.name}</h3>
-              <div className="mt-4">
-                <span className="font-serif-kr text-4xl font-bold text-ink">
-                  {p.monthlyPrice.toLocaleString()}
+              <div className="flex items-baseline gap-2">
+                <span className="font-brand text-4xl font-bold text-gold">
+                  {p.grade}
+                </span>
+                <span className="font-serif-kr text-xl font-bold text-ink">
+                  {p.name}
+                </span>
+              </div>
+              <p className="mt-2 text-sm text-ink-light">{p.tagline}</p>
+
+              <div className="mt-5">
+                <span className="font-serif-kr text-3xl font-bold text-ink">
+                  {p.price.toLocaleString()}
                 </span>
                 <span className="text-ink-light"> 원 / 월</span>
               </div>
-              <p className="mt-1 text-sm text-ink-light">
-                총 {p.totalPrice.toLocaleString()}원 · {p.billingLabel}
-                {p.savePercent ? ` · ${p.savePercent}% 절약` : ""}
-              </p>
+
+              <ul className="mt-5 space-y-2 text-sm text-ink">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2">
+                    <span className="text-gold">✦</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
               <div className="mt-6 flex-1" />
               <Button
                 href={`/quiz?plan=${p.id}`}
@@ -42,7 +60,7 @@ export default function PricingSection() {
                 fullWidth
                 withArrow
               >
-                이 플랜으로 시작
+                {p.grade} 등급으로 시작
               </Button>
             </div>
           ))}

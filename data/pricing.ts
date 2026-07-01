@@ -1,40 +1,41 @@
 export interface Plan {
-  id: "monthly" | "quarterly" | "biannual";
+  id: "A" | "B" | "C";
+  grade: string;
   name: string;
-  monthlyPrice: number; // 월 환산 가격
-  totalPrice: number; // 총 결제 금액
-  billingLabel: string;
+  tagline: string;
+  price: number;
   badge?: string;
   highlight?: boolean;
-  savePercent?: number;
+  features: string[];
 }
 
 export const PLANS: Plan[] = [
   {
-    id: "monthly",
-    name: "월간",
-    monthlyPrice: 39000,
-    totalPrice: 39000,
-    billingLabel: "매달 결제",
+    id: "A",
+    grade: "A",
+    name: "에브리데이",
+    tagline: "매일 부담 없이 주는 기본 간식",
+    price: 29000,
+    features: ["수제 간식 6종", "알레르기 성분 제외", "월 1회 정기배송"],
   },
   {
-    id: "quarterly",
-    name: "3개월",
-    monthlyPrice: 35000,
-    totalPrice: 105000,
-    billingLabel: "3개월마다 결제",
-    badge: "가장 인기",
+    id: "B",
+    grade: "B",
+    name: "시그니처",
+    tagline: "가장 인기 있는 맞춤 큐레이션",
+    price: 48000,
+    badge: "BEST",
     highlight: true,
-    savePercent: 10,
+    features: ["수제 간식 10종", "맞춤 프로파일 반영", "반품 → 포인트 전환"],
   },
   {
-    id: "biannual",
-    name: "6개월",
-    monthlyPrice: 31000,
-    totalPrice: 186000,
-    billingLabel: "6개월마다 결제",
-    badge: "최대 절약",
-    savePercent: 20,
+    id: "C",
+    grade: "C",
+    name: "디어케어",
+    tagline: "건강 케어까지 더한 프리미엄",
+    price: 72000,
+    badge: "PREMIUM",
+    features: ["간식 12종 + 영양 케어", "전담 큐레이션", "우선 배송·전용 상담"],
   },
 ];
 

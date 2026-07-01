@@ -6,12 +6,14 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div>
-            <div className="font-brand text-2xl font-bold text-cream">
-              Dear Pet Box
-            </div>
-            <p className="mt-2 max-w-xs text-sm">
-              반려견 알레르기와 취향을 분석해 매달 딱 맞는 수제 간식 10종을
-              보내드립니다.
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/dearpet-logo-white.jpg"
+              alt="Dear Pet"
+              className="h-16 w-auto rounded"
+            />
+            <p className="mt-3 max-w-xs text-sm">
+              우리 아이에게 딱 맞는 수제 간식 구독.
             </p>
           </div>
           <div className="flex gap-10 text-sm">

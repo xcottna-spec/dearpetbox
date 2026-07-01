@@ -21,7 +21,7 @@ function Stars({ n }: { n: number }) {
 
 export default function ReviewSection() {
   return (
-    <section className="texture-kraft bg-parchment py-20">
+    <section id="reviews" className="bg-parchment py-20">
       <div className="mx-auto max-w-6xl px-5">
         <h2 className="text-center text-section font-bold text-ink">
           이미 {SUBSCRIBER_COUNT.toLocaleString()}마리의 반려견이 맞춤 간식을 받고
