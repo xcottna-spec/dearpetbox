@@ -9,9 +9,9 @@ const PLAN_IMG: Record<string, { id: string; pos: string; alt: string }> = {
     alt: "산책길을 함께 달리는 강아지들 — 매일의 즐거움",
   },
   B: {
-    id: "photo-1583511655857-d19b40a7a54e",
-    pos: "center 30%",
-    alt: "카메라를 바라보는 골든리트리버 — 디어펫 대표 플랜",
+    id: "photo-1593134257782-e89567b7718a",
+    pos: "center 35%",
+    alt: "카메라를 바라보는 강아지 — 디어펫 대표 플랜",
   },
   C: {
     id: "photo-1601758124510-52d02ddb7cbd",

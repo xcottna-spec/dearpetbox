@@ -64,8 +64,8 @@ const SLIDES: Slide[] = [
     cta: { label: "구독 상품 보기", href: "/#pricing" },
   },
   {
-    id: "photo-1583511655857-d19b40a7a54e",
-    pos: "center 30%",
+    id: "photo-1561037404-61cd46aa615b",
+    pos: "center 35%",
     tag: "Transparency",
     head: () => (
       <>
