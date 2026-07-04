@@ -14,9 +14,9 @@ export const PLANS: Plan[] = [
     id: "A",
     grade: "A",
     name: "에브리데이",
-    tagline: "매일 부담 없이 주는 기본 간식",
+    tagline: "매일 부담 없이 시작하는 첫 맞춤",
     price: 29000,
-    features: ["수제 간식 6종", "알레르기 성분 제외", "월 1회 정기배송"],
+    features: ["맞춤 간식 6종", "알레르기 성분 제외", "월 1회 정기배송"],
   },
   {
     id: "B",
@@ -26,7 +26,7 @@ export const PLANS: Plan[] = [
     price: 48000,
     badge: "BEST",
     highlight: true,
-    features: ["수제 간식 10종", "맞춤 프로파일 반영", "반품 → 포인트 전환"],
+    features: ["맞춤 간식 10종", "프로파일 정밀 반영", "반품 → 포인트 전환"],
   },
   {
     id: "C",

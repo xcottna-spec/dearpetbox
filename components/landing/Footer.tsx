@@ -8,12 +8,12 @@ export default function Footer() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/dearpet-logo-white.jpg"
+              src="/logo-white.png"
               alt="Dear Pet"
-              className="h-16 w-auto rounded"
+              className="h-16 w-auto"
             />
             <p className="mt-3 max-w-xs text-sm">
-              우리 아이에게 딱 맞는 수제 간식 구독.
+              우리 아이에게 딱 맞는 맞춤 간식 구독.
             </p>
           </div>
           <div className="flex gap-10 text-sm">

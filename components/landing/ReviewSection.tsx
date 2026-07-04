@@ -1,4 +1,4 @@
-import { REVIEWS, SUBSCRIBER_COUNT } from "@/data/reviews";
+import { REVIEWS } from "@/data/reviews";
 import Reveal from "@/components/ui/Reveal";
 
 const AVATARS = [
@@ -23,9 +23,11 @@ export default function ReviewSection() {
   return (
     <section id="reviews" className="bg-parchment py-20">
       <div className="mx-auto max-w-6xl px-5">
-        <h2 className="text-center text-section font-bold text-ink">
-          이미 {SUBSCRIBER_COUNT.toLocaleString()}마리의 반려견이 맞춤 간식을 받고
-          있어요
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          Reviews
+        </p>
+        <h2 className="mt-3 text-center text-section font-bold text-ink">
+          먼저 만난 보호자들의 이야기
         </h2>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

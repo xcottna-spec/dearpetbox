@@ -103,6 +103,33 @@ export default function QuizFlow() {
     } catch {}
   }, [state, hydrated]);
 
+  // 프로파일 완성(StepF 진입) 시 운영자에게 진단 데이터 전송 (1회)
+  useEffect(() => {
+    if (state.step !== "F" || !hydrated) return;
+    try {
+      const sentKey = "dpLeadSent:" + state.name;
+      if (sessionStorage.getItem(sentKey)) return;
+      sessionStorage.setItem(sentKey, "1");
+      fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: state.name,
+          breed: state.breed,
+          ageMonths: state.ageMonths,
+          weight: state.weight,
+          gender: state.gender,
+          allergies: state.allergies,
+          noAllergy: state.noAllergy,
+          textures: state.textures,
+          flavors: state.flavors,
+          healthGoals: state.healthGoals,
+          plan: state.plan,
+        }),
+      }).catch(() => {});
+    } catch {}
+  }, [state, hydrated]);
+
   const stepIndex = INPUT_STEPS.indexOf(state.step);
   const name = state.name || "우리 아이";
 
@@ -354,7 +381,27 @@ export default function QuizFlow() {
                 {state.breed || "믹스견"} · {Math.floor(state.ageMonths / 12)}살 · {state.weight || "체중 미입력"}
               </ResultRow>
             </div>
-            <div className="mt-8">
+            <div className="mt-5 flex items-center justify-center gap-5 text-sm">
+              <button
+                onClick={() => go("B")}
+                className="text-ink-light underline underline-offset-4 hover:text-ink"
+              >
+                프로파일 수정하기
+              </button>
+              <span className="text-borderk">|</span>
+              <button
+                onClick={() => {
+                  try {
+                    localStorage.removeItem("dpQuiz");
+                  } catch {}
+                  window.location.reload();
+                }}
+                className="text-ink-light underline underline-offset-4 hover:text-ink"
+              >
+                처음부터 다시
+              </button>
+            </div>
+            <div className="mt-6">
               <Button onClick={() => go("G")} withArrow>
                 {name} 첫 박스 받아보기
               </Button>
@@ -437,7 +484,7 @@ export default function QuizFlow() {
             </div>
 
             <p className="mt-4 rounded-lg bg-kraft-light p-3 text-center text-sm text-ink-light">
-              첫 달 만족 보장 — 마음에 안 들면 전액 환불
+              첫 박스 안심 케어 — 안 맞은 간식은 포인트로 돌려드려요
             </p>
             <div className="mt-6">
               <Button

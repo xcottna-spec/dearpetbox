@@ -8,9 +8,9 @@ export default function SignupPage() {
     <main className="flex min-h-screen items-center justify-center bg-parchment px-5 py-16">
       <div className="w-full max-w-sm text-center">
         <img
-          src="/dearpet-logo.jpg"
+          src="/logo-gold.png"
           alt="Dear Pet"
-          className="mx-auto h-20 w-auto mix-blend-multiply"
+          className="mx-auto h-20 w-auto"
         />
         <h1 className="mt-4 font-serif-kr text-2xl font-bold text-ink">회원가입</h1>
         <p className="mt-2 text-sm text-ink-light">가입하고 첫 박스 3,000P 받기.</p>

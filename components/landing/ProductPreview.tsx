@@ -20,14 +20,14 @@ export default function ProductPreview() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="bg-cream py-20">
+    <section id="box" className="bg-cream py-20">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2">
         <div className="relative">
           <div
-            className="aspect-[4/3] rounded-2xl border-2 border-borderk bg-cover bg-center shadow-kraft"
+            className="aspect-[4/3] border border-border bg-cover bg-center shadow-kraft"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1597633425046-08f5110420b5?w=900&q=80&auto=format&fit=crop')",
+                "url('https://images.unsplash.com/photo-1597633425046-08f5110420b5?w=1600&q=85&auto=format&fit=crop')",
               backgroundPosition: "center 35%",
             }}
             role="img"

@@ -1,7 +1,7 @@
 const ITEMS = [
-  { icon: "🐾", text: "알레르기 성분 100% 제외 보장" },
-  { icon: "✦", text: "국내 소규모 공방 수제 제작" },
-  { icon: "↩", text: "첫 달 100% 만족 보장" },
+  { icon: "🐾", text: "알레르기 성분 100% 제외" },
+  { icon: "✦", text: "성분·원산지 전부 공개" },
+  { icon: "↩", text: "안 맞으면 포인트로 전환" },
 ];
 
 export default function TrustBar() {

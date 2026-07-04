@@ -6,10 +6,10 @@ export default function EditorialBand() {
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
         <Reveal>
           <div
-            className="aspect-[5/4] rounded-2xl border-2 border-borderk bg-cover shadow-kraft"
+            className="aspect-[5/4] border border-border bg-cover shadow-kraft"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=1000&q=80&auto=format&fit=crop')",
+                "url('https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=1600&q=85&auto=format&fit=crop')",
               backgroundPosition: "center 20%",
             }}
             role="img"

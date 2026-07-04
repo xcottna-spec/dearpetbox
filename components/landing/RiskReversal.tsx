@@ -23,7 +23,7 @@ export default function RiskReversal() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <StampBadge className="border-parchment bg-parchment/10 text-parchment">
-            첫 달 100% 만족 보장
+            첫 박스 안심 케어
           </StampBadge>
           <StampBadge
             rotate="right"

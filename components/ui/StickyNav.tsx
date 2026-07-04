@@ -36,9 +36,9 @@ export default function StickyNav() {
           <Link href="/" aria-label="Dear Pet 홈">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/dearpet-logo.jpg"
+              src="/logo-gold.png"
               alt="Dear Pet"
-              className="h-12 w-auto mix-blend-multiply sm:h-14"
+              className="h-11 w-auto sm:h-12"
             />
           </Link>
 
