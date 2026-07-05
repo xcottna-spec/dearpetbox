@@ -8,6 +8,8 @@ export interface Plan {
   highlight?: boolean;
   features: string[];
   image: { id: string; pos: string; alt: string };
+  /** 실제 결제·주문이 이뤄지는 카페24 상품 페이지 (주문 집계는 카페24) */
+  cafe24Url: string;
 }
 
 export const PLANS: Plan[] = [
@@ -23,6 +25,7 @@ export const PLANS: Plan[] = [
       pos: "center 45%",
       alt: "산책길을 함께 달리는 강아지들 — 매일의 즐거움",
     },
+    cafe24Url: "https://dearpetbox.co.kr/product/detail.html?product_no=72",
   },
   {
     id: "B",
@@ -38,6 +41,7 @@ export const PLANS: Plan[] = [
       pos: "center 35%",
       alt: "카메라를 바라보는 강아지 — 디어펫 대표 플랜",
     },
+    cafe24Url: "https://dearpetbox.co.kr/product/detail.html?product_no=73",
   },
   {
     id: "C",
@@ -52,6 +56,7 @@ export const PLANS: Plan[] = [
       pos: "center 30%",
       alt: "애착 인형을 문 강아지 — 세심한 케어",
     },
+    cafe24Url: "https://dearpetbox.co.kr/product/detail.html?product_no=74",
   },
 ];
 

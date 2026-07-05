@@ -215,7 +215,15 @@ export default function SignupForm() {
               이전
             </button>
             <button
-              onClick={() => validate() && setDone(true)}
+              onClick={() => {
+                if (!validate()) return;
+                try {
+                  // 가입 즉시 로그인 상태 부여 → 맞춤 진단 게이트 통과
+                  localStorage.setItem("dpAuth", f.userId.trim());
+                  if (f.dogName.trim()) localStorage.setItem("dogName", f.dogName.trim());
+                } catch {}
+                setDone(true);
+              }}
               className="flex-1 bg-ink py-3.5 font-semibold text-cream"
             >
               가입하기

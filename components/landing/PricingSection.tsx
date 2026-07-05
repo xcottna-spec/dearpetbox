@@ -71,13 +71,14 @@ export default function PricingSection() {
                   </ul>
 
                   <div className="mt-6 flex-1" />
+                  {/* 결제·주문은 카페24 공식몰에서 (주문 집계 일원화) */}
                   <Button
-                    href={`/quiz?plan=${p.id}`}
+                    href={p.cafe24Url}
                     variant={p.highlight ? "primary" : "secondary"}
                     fullWidth
                     withArrow
                   >
-                    {p.name} 시작하기
+                    {p.name} 구독하기
                   </Button>
                 </div>
               </div>
@@ -86,7 +87,10 @@ export default function PricingSection() {
         </div>
 
         <p className="mt-8 text-center text-sm text-ink-light">
-          언제든 해지 가능 · 다음 배송 3일 전까지 취소
+          언제든 해지 가능 · 다음 배송 3일 전까지 취소 ·{" "}
+          <a href="/quiz" className="font-semibold text-gold underline underline-offset-4">
+            먼저 맞춤 진단 받기 →
+          </a>
         </p>
       </div>
     </section>
