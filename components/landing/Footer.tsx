@@ -37,7 +37,12 @@ export default function Footer() {
               >
                 인스타그램
               </a>
-              <a href="#" className="block hover:text-cream">
+              <a
+                href="http://pf.kakao.com/_lqGNn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:text-cream"
+              >
                 카카오채널
               </a>
               <a href="#" className="block hover:text-cream">

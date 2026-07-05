@@ -19,10 +19,10 @@ export default function FloatingRail() {
   return (
     <div className="fixed bottom-24 right-4 z-40 flex flex-col gap-2 md:bottom-8">
       <a
-        href="http://pf.kakao.com/_dearpet"
+        href="http://pf.kakao.com/_lqGNn/chat"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="카카오톡 채널"
+        aria-label="카카오톡 채널 상담"
         className={`${item} bg-[#FEE500]`}
       >
         {/* 카카오 말풍선 */}
