@@ -9,10 +9,10 @@ export default function PricingSection() {
           Subscription
         </p>
         <h2 className="mt-3 text-center text-section font-bold text-ink">
-          우리 아이에게 맞는 플랜을 골라보세요
+          우리 아이에게 맞는 박스를 골라보세요
         </h2>
         <p className="mt-3 text-center text-ink-light">
-          어떤 플랜이든, 우리 아이 프로파일에 맞춰 구성됩니다.
+          어떤 박스든, 우리 아이 프로파일에 맞춰 구성됩니다.
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">

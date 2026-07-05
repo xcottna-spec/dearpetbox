@@ -504,7 +504,7 @@ export default function QuizFlow() {
         {state.step === "G" && (
           <section>
             <h1 className="font-serif-kr text-2xl font-bold text-ink">
-              {name}에게 어떤 플랜이 좋을까요?
+              우리 아이에게 어떤 박스가 좋을까요?
             </h1>
             <div className="mt-6 space-y-4">
               {PLANS.map((p) => (
@@ -581,7 +581,7 @@ export default function QuizFlow() {
               )}
               <div className="p-6">
                 <SummaryRow label="반려견">{name}</SummaryRow>
-                <SummaryRow label="플랜">{selectedPlan?.name}</SummaryRow>
+                <SummaryRow label="박스">{selectedPlan?.name}</SummaryRow>
                 <SummaryRow label="구성">{selectedPlan?.features.join(" · ")}</SummaryRow>
                 <SummaryRow label="결제 금액">
                   {selectedPlan?.price.toLocaleString()}원 / 월
