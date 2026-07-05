@@ -62,12 +62,12 @@ export default function ReviewSection() {
 
         <p className="mt-10 text-center">
           <a
-            href="https://www.instagram.com/dearpet_offical/"
+            href="https://www.instagram.com/dearpet.official/"
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-stamp underline underline-offset-4"
           >
-            더 많은 후기 보기 @dearpet_offical
+            더 많은 후기 보기 @dearpet.official
           </a>
         </p>
       </div>
