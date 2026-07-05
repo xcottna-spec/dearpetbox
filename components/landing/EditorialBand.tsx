@@ -9,8 +9,8 @@ export default function EditorialBand() {
             className="aspect-[5/4] border border-border bg-cover shadow-kraft"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=1600&q=85&auto=format&fit=crop')",
-              backgroundPosition: "center 20%",
+                "url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=1600&q=85&auto=format&fit=crop')",
+              backgroundPosition: "center 35%",
             }}
             role="img"
             aria-label="반려견과 함께하는 보호자"

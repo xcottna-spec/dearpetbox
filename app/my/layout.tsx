@@ -13,8 +13,9 @@ export default function MyLayout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-cream">
       <header className="border-b border-borderk bg-parchment">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
-          <Link href="/" className="font-brand text-xl font-bold text-ink">
-            Dear Pet<span className="text-stamp">.</span>
+          <Link href="/" aria-label="Dear Pet 홈">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-gold.png" alt="Dear Pet" className="h-10 w-auto" />
           </Link>
           <span className="text-sm text-ink-light">마이페이지</span>
         </div>

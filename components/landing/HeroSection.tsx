@@ -13,7 +13,7 @@ interface Slide {
   id: string;
   pos: string;
   tag: string;
-  head: (name: string) => React.ReactNode;
+  head: React.ReactNode;
   sub: React.ReactNode;
   cta: { label: string; href: string };
 }
@@ -23,9 +23,9 @@ const SLIDES: Slide[] = [
     id: "photo-1576201836106-db1758fd1c97",
     pos: "center 40%",
     tag: "반려견 맞춤 간식 구독",
-    head: (name) => (
+    head: (
       <>
-        {name}가 처음으로
+        우리 아이가 처음으로
         <br />
         <span className="accent">다 먹어치운 간식</span>이
         <br />
@@ -45,7 +45,7 @@ const SLIDES: Slide[] = [
     id: "photo-1601758124510-52d02ddb7cbd",
     pos: "center 25%",
     tag: "Feedback Loop",
-    head: () => (
+    head: (
       <>
         안 맞은 간식은
         <br />
@@ -67,7 +67,7 @@ const SLIDES: Slide[] = [
     id: "photo-1561037404-61cd46aa615b",
     pos: "center 35%",
     tag: "Transparency",
-    head: () => (
+    head: (
       <>
         무엇이 들었는지,
         <br />
@@ -86,15 +86,7 @@ const SLIDES: Slide[] = [
 ];
 
 export default function HeroSection() {
-  const [dogName, setDogName] = useState("우리 아이");
   const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("dogName");
-      if (stored) setDogName(stored);
-    } catch {}
-  }, []);
 
   const next = useCallback(
     () => setIdx((i) => (i + 1) % SLIDES.length),
@@ -169,7 +161,7 @@ export default function HeroSection() {
               {s.tag}
             </span>
             <h1 className="font-serif-kr text-hero font-bold text-cream drop-shadow-[0_2px_18px_rgba(0,0,0,0.5)]">
-              {s.head(dogName)}
+              {s.head}
             </h1>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-parchment/90">
               {s.sub}

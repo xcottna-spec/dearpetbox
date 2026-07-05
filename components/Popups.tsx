@@ -27,8 +27,8 @@ const SLIDES = [
       </>
     ),
     desc: "안 맞은 간식은 포인트로, 다음 박스는 더 정확하게.",
-    img: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=1200&q=85&auto=format&fit=crop",
-    pos: "center 22%",
+    img: "https://images.unsplash.com/photo-1568393691622-c7ba131d63b4?w=1200&q=85&auto=format&fit=crop",
+    pos: "center 30%",
     cta: { label: "구독 상품 보기", href: "/#pricing" },
   },
 ];

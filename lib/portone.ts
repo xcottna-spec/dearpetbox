@@ -8,11 +8,15 @@ export type PayResult =
   | { ok: true; paymentId: string }
   | { ok: false; reason: "not_configured" | "cancelled" | string };
 
+// KG이니시스 일반결제는 구매자 이메일이 형식상 필수 →
+// 고객에겐 받지 않고 시스템 주소를 전달한다 (영수증 수신용, 대표님 요청: 휴대폰만 필수)
+const SYSTEM_EMAIL = "order@dearpetbox.co.kr";
+
 export async function requestSubscriptionPayment(opts: {
   orderName: string;
   totalAmount: number;
   customerName?: string;
-  customerEmail: string; // KG이니시스 등 일반결제는 이메일 필수
+  customerEmail?: string;
   customerPhone?: string;
 }): Promise<PayResult> {
   if (!isPortOneConfigured) {
@@ -34,7 +38,7 @@ export async function requestSubscriptionPayment(opts: {
       payMethod: "CARD",
       customer: {
         fullName: opts.customerName,
-        email: opts.customerEmail,
+        email: opts.customerEmail || SYSTEM_EMAIL,
         phoneNumber: opts.customerPhone,
       },
     });

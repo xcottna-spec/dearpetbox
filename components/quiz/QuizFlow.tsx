@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useReducer, useState } from "react";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import ProgressBar from "@/components/ui/ProgressBar";
 import StampBadge from "@/components/ui/StampBadge";
@@ -21,6 +22,7 @@ interface QuizState {
   weight: string;
   gender: string;
   allergies: string[];
+  allergyNote: string;
   noAllergy: boolean;
   textures: string[];
   flavors: string[];
@@ -36,6 +38,7 @@ const initialState: QuizState = {
   weight: "",
   gender: "",
   allergies: [],
+  allergyNote: "",
   noAllergy: false,
   textures: [],
   flavors: [],
@@ -79,8 +82,8 @@ export default function QuizFlow() {
   const [payMsg, setPayMsg] = useState("");
   const [paying, setPaying] = useState(false);
   const [hydrated, setHydrated] = useState(false);
-  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const phoneOk = phone.replace(/[^0-9]/g, "").length >= 10;
 
   // localStorage hydrate + persist
   useEffect(() => {
@@ -120,6 +123,7 @@ export default function QuizFlow() {
           weight: state.weight,
           gender: state.gender,
           allergies: state.allergies,
+          allergyNote: state.allergyNote,
           noAllergy: state.noAllergy,
           textures: state.textures,
           flavors: state.flavors,
@@ -146,10 +150,9 @@ export default function QuizFlow() {
     setPaying(true);
     setPayMsg("");
     const res = await requestSubscriptionPayment({
-      orderName: `디어펫 박스 · ${name} · ${selectedPlan.grade}등급 ${selectedPlan.name}`,
+      orderName: `디어펫 박스 · ${name} · ${selectedPlan.name} 플랜`,
       totalAmount: selectedPlan.price,
       customerName: name,
-      customerEmail: email,
       customerPhone: phone,
     });
     setPaying(false);
@@ -165,8 +168,16 @@ export default function QuizFlow() {
   };
 
   return (
-    <main className="texture-kraft min-h-screen bg-parchment px-5 pb-24 pt-24">
+    <main className="min-h-screen bg-parchment px-5 pb-24 pt-8">
       <div className="mx-auto max-w-xl">
+        {/* 로고 — 클릭 시 홈으로 */}
+        <div className="mb-8 flex justify-center">
+          <Link href="/" aria-label="Dear Pet 홈으로">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-gold.png" alt="Dear Pet" className="h-14 w-auto" />
+          </Link>
+        </div>
+
         {INPUT_STEPS.includes(state.step) && (
           <div className="mb-8">
             <ProgressBar
@@ -263,7 +274,7 @@ export default function QuizFlow() {
             <p className="mt-2 text-ink-light">
               선택하신 성분은 박스에 <b className="text-stamp">절대 포함되지 않습니다.</b>
             </p>
-            <div className="mt-6 grid grid-cols-3 gap-2">
+            <div className="mt-6 grid grid-cols-4 gap-2">
               {ALLERGENS.map((a) => (
                 <button
                   key={a.id}
@@ -293,7 +304,27 @@ export default function QuizFlow() {
             >
               지금까지 이상 반응 없었어요
             </button>
-            <Nav onBack={() => go("B")} onNext={() => go("D")} nextOk={state.noAllergy || state.allergies.length > 0} />
+
+            {/* 기타 — 목록에 없는 반응은 비고로 수집 */}
+            <label className="mt-6 block text-sm font-semibold text-ink">
+              기타 메모 <span className="font-normal text-ink-light">(선택)</span>
+            </label>
+            <textarea
+              value={state.allergyNote}
+              onChange={(e) => set("allergyNote", e.target.value)}
+              rows={2}
+              placeholder="예: 밀가루 든 간식에 두드러기가 났어요 / 특정 브랜드 제품 구토"
+              className="mt-2 w-full resize-none rounded-lg border-2 border-borderk bg-cream px-4 py-3 text-sm outline-none focus:border-stamp"
+            />
+            <p className="mt-1 text-xs text-ink-light">
+              적어주신 내용은 담당자가 직접 확인해 구성에 반영해요.
+            </p>
+
+            <Nav
+              onBack={() => go("B")}
+              onNext={() => go("D")}
+              nextOk={state.noAllergy || state.allergies.length > 0 || state.allergyNote.trim().length > 0}
+            />
           </section>
         )}
 
@@ -373,6 +404,9 @@ export default function QuizFlow() {
                         </span>
                       ))}
               </ResultRow>
+              {state.allergyNote.trim() && (
+                <ResultRow label="기타 메모(비고)">{state.allergyNote}</ResultRow>
+              )}
               <ResultRow label="추천 식감·맛">
                 {[...state.textures, ...state.flavors].join(", ") || "인기 조합 자동 구성"}
               </ResultRow>
@@ -413,28 +447,49 @@ export default function QuizFlow() {
         {state.step === "G" && (
           <section>
             <h1 className="font-serif-kr text-2xl font-bold text-ink">
-              {name}의 첫 박스, 어떤 주기로 받을까요?
+              {name}에게 어떤 플랜이 좋을까요?
             </h1>
-            <div className="mt-6 space-y-3">
+            <div className="mt-6 space-y-4">
               {PLANS.map((p) => (
                 <button
                   key={p.id}
                   onClick={() => set("plan", p.id)}
-                  className={`flex w-full items-center justify-between rounded-lg border-2 p-4 text-left ${
-                    state.plan === p.id ? "border-stamp bg-stamp/5 shadow-kraft-sm" : "border-borderk bg-cream"
+                  className={`flex w-full overflow-hidden border-2 text-left transition-colors ${
+                    state.plan === p.id
+                      ? "border-gold bg-cream shadow-kraft"
+                      : "border-borderk bg-cream"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="font-brand text-2xl font-bold text-gold">{p.grade}</span>
+                  {/* 플랜 무드 사진 */}
+                  <div
+                    className="w-28 shrink-0 bg-cover sm:w-36"
+                    style={{
+                      backgroundImage: `url('https://images.unsplash.com/${p.image.id}?w=600&q=85&auto=format&fit=crop')`,
+                      backgroundPosition: p.image.pos,
+                    }}
+                    role="img"
+                    aria-label={p.image.alt}
+                  />
+                  <div className="flex flex-1 items-center justify-between gap-3 p-4">
                     <div>
-                      <div className="font-bold text-ink">
-                        {p.name} {p.badge && <span className="ml-1 text-xs text-gold">· {p.badge}</span>}
+                      <div className="flex items-center gap-2">
+                        <span className="font-brand text-xl font-bold text-gold">{p.grade}</span>
+                        <span className="font-bold text-ink">{p.name}</span>
+                        {p.badge && (
+                          <span className="bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-cream">
+                            {p.badge}
+                          </span>
+                        )}
                       </div>
-                      <div className="text-sm text-ink-light">{p.tagline}</div>
+                      <div className="mt-1 text-sm text-ink-light">{p.tagline}</div>
+                      <div className="mt-1 text-xs text-ink-light">
+                        {p.features.join(" · ")}
+                      </div>
                     </div>
-                  </div>
-                  <div className="font-serif-kr text-lg font-bold">
-                    {p.price.toLocaleString()}원<span className="text-xs font-normal">/월</span>
+                    <div className="shrink-0 font-serif-kr text-lg font-bold">
+                      {p.price.toLocaleString()}
+                      <span className="text-xs font-normal">원/월</span>
+                    </div>
                   </div>
                 </button>
               ))}
@@ -447,40 +502,49 @@ export default function QuizFlow() {
         {state.step === "H" && (
           <section>
             <h1 className="font-serif-kr text-2xl font-bold text-ink">주문 확인</h1>
-            <div className="mt-6 rounded-lg border-2 border-borderk bg-cream p-6 shadow-kraft-sm">
-              <SummaryRow label="반려견">{name}</SummaryRow>
-              <SummaryRow label="플랜">
-                {selectedPlan?.grade}등급 · {selectedPlan?.name}
-              </SummaryRow>
-              <SummaryRow label="결제 금액">
-                {selectedPlan?.price.toLocaleString()}원 / 월
-              </SummaryRow>
+            <div className="mt-6 overflow-hidden border border-border bg-cream shadow-kraft-sm">
+              {selectedPlan && (
+                <div
+                  className="relative h-36 bg-cover"
+                  style={{
+                    backgroundImage: `url('https://images.unsplash.com/${selectedPlan.image.id}?w=1200&q=85&auto=format&fit=crop')`,
+                    backgroundPosition: selectedPlan.image.pos,
+                  }}
+                  role="img"
+                  aria-label={selectedPlan.image.alt}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
+                  <div className="absolute bottom-3 left-4 text-cream">
+                    <span className="font-brand text-lg font-bold text-gold-light">
+                      {selectedPlan.grade}
+                    </span>{" "}
+                    <span className="font-serif-kr font-bold">{selectedPlan.name}</span>
+                  </div>
+                </div>
+              )}
+              <div className="p-6">
+                <SummaryRow label="반려견">{name}</SummaryRow>
+                <SummaryRow label="플랜">{selectedPlan?.name}</SummaryRow>
+                <SummaryRow label="구성">{selectedPlan?.features.join(" · ")}</SummaryRow>
+                <SummaryRow label="결제 금액">
+                  {selectedPlan?.price.toLocaleString()}원 / 월
+                </SummaryRow>
+              </div>
             </div>
-            <div className="mt-6 space-y-3">
-              <div>
-                <label className="mb-1 block text-sm font-semibold text-ink">
-                  이메일 <span className="text-stamp">*</span>
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="주문 확인·영수증을 받을 이메일"
-                  className="w-full rounded-lg border-2 border-borderk bg-cream px-4 py-3 outline-none focus:border-stamp"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-semibold text-ink">
-                  휴대폰 번호
-                </label>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="010-0000-0000"
-                  className="w-full rounded-lg border-2 border-borderk bg-cream px-4 py-3 outline-none focus:border-stamp"
-                />
-              </div>
+            <div className="mt-6">
+              <label className="mb-1 block text-sm font-semibold text-ink">
+                휴대폰 번호 <span className="text-gold">*</span>
+              </label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="010-0000-0000 (배송·카톡 안내용)"
+                className="w-full rounded-lg border-2 border-borderk bg-cream px-4 py-3 outline-none focus:border-stamp"
+              />
+              <p className="mt-1 text-xs text-ink-light">
+                배송 전 카카오톡 안내와 배송 연락에 사용돼요.
+              </p>
             </div>
 
             <p className="mt-4 rounded-lg bg-kraft-light p-3 text-center text-sm text-ink-light">
@@ -491,7 +555,7 @@ export default function QuizFlow() {
                 fullWidth
                 withArrow
                 isLoading={paying}
-                disabled={paying || !email.trim()}
+                disabled={paying || !phoneOk}
                 onClick={handlePay}
               >
                 결제하고 첫 박스 받기

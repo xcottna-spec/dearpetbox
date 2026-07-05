@@ -1,13 +1,14 @@
 import { REVIEWS } from "@/data/reviews";
 import Reveal from "@/components/ui/Reveal";
 
+// 다른 섹션과 겹치지 않는 전용 아바타 컷 (모두 검증됨)
 const AVATARS = [
-  "photo-1583511655857-d19b40a7a54e",
-  "photo-1597633425046-08f5110420b5",
   "photo-1517849845537-4d257902454a",
-  "photo-1518717758536-85ae29035b6d",
-  "photo-1568393691622-c7ba131d63b4",
-  "photo-1593134257782-e89567b7718a",
+  "photo-1591768575198-88dac53fbd0a",
+  "photo-1583512603805-3cc6b41f3edb",
+  "photo-1596492784531-6e6eb5ea9993",
+  "photo-1568572933382-74d440642117",
+  "photo-1453227588063-bb302b62f50b",
 ];
 
 function Stars({ n }: { n: number }) {

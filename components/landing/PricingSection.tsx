@@ -1,25 +1,6 @@
 import { PLANS } from "@/data/pricing";
 import Button from "@/components/ui/Button";
 
-// 플랜별 무드 사진 (4K 원본 → 카드 사이즈 최적화)
-const PLAN_IMG: Record<string, { id: string; pos: string; alt: string }> = {
-  A: {
-    id: "photo-1548199973-03cce0bbc87b",
-    pos: "center 45%",
-    alt: "산책길을 함께 달리는 강아지들 — 매일의 즐거움",
-  },
-  B: {
-    id: "photo-1593134257782-e89567b7718a",
-    pos: "center 35%",
-    alt: "카메라를 바라보는 강아지 — 디어펫 대표 플랜",
-  },
-  C: {
-    id: "photo-1601758124510-52d02ddb7cbd",
-    pos: "center 20%",
-    alt: "보호자 품에 안긴 강아지 — 세심한 케어",
-  },
-};
-
 export default function PricingSection() {
   return (
     <section id="pricing" className="bg-cream py-20">
@@ -36,7 +17,7 @@ export default function PricingSection() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">
           {PLANS.map((p) => {
-            const img = PLAN_IMG[p.id];
+            const img = p.image;
             return (
               <div
                 key={p.id}
