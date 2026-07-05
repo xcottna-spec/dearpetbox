@@ -32,7 +32,7 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="font-semibold text-cream">채널</div>
               <a
-                href="https://instagram.com/dearpetbox"
+                href="https://www.instagram.com/dearpet_offical/"
                 className="block hover:text-cream"
               >
                 인스타그램
