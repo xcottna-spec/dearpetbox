@@ -18,7 +18,6 @@ export default function ReturnPage() {
 
   const toggle = (id: string) =>
     setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
-  const total = TREATS.filter((t) => picked.includes(t.id)).reduce((s, t) => s + t.price, 0);
 
   if (submitted) {
     return (
@@ -26,7 +25,7 @@ export default function ReturnPage() {
         <div className="text-4xl">🐾</div>
         <h1 className="mt-3 font-serif-kr text-xl font-bold text-ink">반품 신청이 접수되었어요</h1>
         <p className="mt-2 text-ink-light">
-          {total.toLocaleString()}P가 곧 적립되고, 이 피드백으로 다음 박스가 더 잘 맞아집니다.
+          선택하신 {picked.length}종은 다음 박스에서 다른 간식으로 무료 교체해드리고, 이 피드백으로 다음 박스가 더 잘 맞아집니다.
         </p>
       </div>
     );
@@ -35,7 +34,7 @@ export default function ReturnPage() {
   return (
     <div>
       <h1 className="font-serif-kr text-xl font-bold text-ink">반품 신청</h1>
-      <p className="mt-1 text-sm text-ink-light">반품할 간식을 선택하세요. 금액은 포인트로 전환됩니다.</p>
+      <p className="mt-1 text-sm text-ink-light">반품할 간식을 선택하세요. 선택한 간식은 다음 박스에서 무료로 교체됩니다.</p>
 
       <div className="mt-4 space-y-2">
         {TREATS.map((t) => (
@@ -71,13 +70,13 @@ export default function ReturnPage() {
       </select>
 
       <div className="mt-6 flex items-center justify-between rounded-lg bg-kraft-light p-4">
-        <span className="text-sm text-ink-light">전환 예정 포인트</span>
-        <span className="font-serif-kr text-xl font-bold text-stamp">{total.toLocaleString()} P</span>
+        <span className="text-sm text-ink-light">무료 교체 예정</span>
+        <span className="font-serif-kr text-xl font-bold text-stamp">{picked.length}종</span>
       </div>
 
       <div className="mt-6">
         <Button fullWidth withArrow disabled={picked.length === 0} onClick={() => setSubmitted(true)}>
-          반품 신청하고 포인트 받기
+          반품 신청하고 무료 교체받기
         </Button>
       </div>
     </div>

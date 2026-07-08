@@ -16,7 +16,7 @@ export default function FinalCTA() {
           </Button>
         </div>
         <p className="mt-4 text-sm text-ink-light">
-          구독 전 취소 가능 · 알레르기 성분 100% 제외 · 안 맞으면 포인트 전환
+          구독 전 취소 가능 · 알레르기 성분 100% 제외 · 안 맞으면 무료 교체
         </p>
       </div>
     </section>

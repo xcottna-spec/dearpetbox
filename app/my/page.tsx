@@ -10,9 +10,9 @@ export default function MyDashboard() {
           <p className="mt-2 text-sm text-ink-light">3개월 플랜 · 2회차</p>
         </div>
         <div className="rounded-lg border-2 border-borderk bg-parchment p-6 shadow-kraft-sm">
-          <div className="text-sm text-ink-light">포인트 잔액</div>
-          <div className="mt-1 font-serif-kr text-2xl font-bold text-stamp">4,500 P</div>
-          <p className="mt-2 text-sm text-ink-light">구독 갱신 시 사용 가능</p>
+          <div className="text-sm text-ink-light">구독 상태</div>
+          <div className="mt-1 font-serif-kr text-2xl font-bold text-ink">시그니처 · 이용 중</div>
+          <p className="mt-2 text-sm text-ink-light">다음 배송 3일 전까지 해지 가능</p>
         </div>
       </div>
 
@@ -33,7 +33,7 @@ export default function MyDashboard() {
         {[
           { href: "/my/profile", label: "프로파일 수정" },
           { href: "/my/return", label: "반품 신청" },
-          { href: "/my/points", label: "포인트 내역" },
+          { href: "/my/orders", label: "주문·배송" },
         ].map((q) => (
           <Link
             key={q.href}

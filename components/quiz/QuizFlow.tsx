@@ -220,7 +220,7 @@ export default function QuizFlow() {
                   href="/signup"
                   className="block w-full border border-border bg-cream py-3.5 font-semibold text-ink"
                 >
-                  3분 만에 회원가입 (+3,000P)
+                  3분 만에 회원가입 · 첫 박스 할인
                 </Link>
               </div>
             </section>
@@ -605,7 +605,7 @@ export default function QuizFlow() {
             </div>
 
             <p className="mt-4 rounded-lg bg-kraft-light p-3 text-center text-sm text-ink-light">
-              첫 박스 안심 케어 — 안 맞은 간식은 포인트로 돌려드려요
+              첫 박스 안심 케어 — 안 맞은 간식은 다음 박스에서 무료로 교체해드려요
             </p>
             <div className="mt-6">
               <Button

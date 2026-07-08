@@ -1,7 +1,7 @@
 const ITEMS = [
   { icon: "🐾", text: "알레르기 성분 100% 제외" },
   { icon: "✦", text: "성분·원산지 전부 공개" },
-  { icon: "↩", text: "안 맞으면 포인트로 전환" },
+  { icon: "↩", text: "안 맞으면 무료로 교체" },
 ];
 
 export default function TrustBar() {

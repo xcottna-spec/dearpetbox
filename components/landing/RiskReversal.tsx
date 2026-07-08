@@ -14,7 +14,7 @@ export default function RiskReversal() {
         <p className="mx-auto mt-8 max-w-xl text-parchment/90">
           간식은 먹어보기 전까진 몰라요.
           <br />
-          안 맞으면 반품해 포인트로 돌려받으세요.
+          안 맞으면 반품하고 다음 박스에서 무료로 교체받으세요.
         </p>
 
         <p className="font-brand mt-8 text-2xl font-bold text-cream sm:text-3xl">
@@ -29,7 +29,7 @@ export default function RiskReversal() {
             rotate="right"
             className="border-parchment bg-parchment/10 text-parchment"
           >
-            반품 → 포인트 전환
+            반품 → 무료 교체
           </StampBadge>
           <StampBadge className="border-parchment bg-parchment/10 text-parchment">
             언제든 해지 가능

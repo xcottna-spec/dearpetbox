@@ -35,7 +35,7 @@ export const PLANS: Plan[] = [
     price: 48000,
     badge: "BEST",
     highlight: true,
-    features: ["맞춤 간식 10종", "프로파일 정밀 반영", "반품 → 포인트 전환"],
+    features: ["맞춤 간식 10종", "프로파일 정밀 반영", "반품 → 무료 교체"],
     image: {
       id: "photo-1593134257782-e89567b7718a",
       pos: "center 35%",

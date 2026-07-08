@@ -49,7 +49,7 @@ const SLIDES: Slide[] = [
       <>
         안 맞은 간식은
         <br />
-        <span className="accent">포인트로</span> 돌려받고,
+        <span className="accent">무료로</span> 교체받고,
         <br />
         다음 박스는 더 정확하게.
       </>

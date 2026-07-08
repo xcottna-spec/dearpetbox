@@ -5,15 +5,14 @@ import Link from "next/link";
 
 const SLIDES = [
   {
-    tag: "Welcome Gift",
+    tag: "Welcome Offer",
     title: (
       <>
         첫 구독,
-        <br />
-        3,000P로 가볍게
+        <br />첫 박스 할인가로
       </>
     ),
-    desc: "신규가입 시 3,000포인트를 바로 드려요.",
+    desc: "신규가입 시 첫 정기박스를 특별 할인가로 시작하세요.",
     img: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=1200&q=85&auto=format&fit=crop",
     pos: "center 35%",
     cta: { label: "맞춤 진단 시작하기", href: "/quiz" },
@@ -26,7 +25,7 @@ const SLIDES = [
         <br />더 잘 맞는 박스
       </>
     ),
-    desc: "안 맞은 간식은 포인트로, 다음 박스는 더 정확하게.",
+    desc: "안 맞은 간식은 무료 교체, 다음 박스는 더 정확하게.",
     img: "https://images.unsplash.com/photo-1568393691622-c7ba131d63b4?w=1200&q=85&auto=format&fit=crop",
     pos: "center 30%",
     cta: { label: "구독 상품 보기", href: "/#pricing" },

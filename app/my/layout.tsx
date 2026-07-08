@@ -4,7 +4,6 @@ const NAV = [
   { href: "/my", label: "대시보드" },
   { href: "/my/profile", label: "반려견 프로파일" },
   { href: "/my/orders", label: "주문·배송" },
-  { href: "/my/points", label: "포인트" },
   { href: "/my/return", label: "반품 신청" },
 ];
 

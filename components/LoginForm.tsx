@@ -62,7 +62,7 @@ export default function LoginForm() {
 
       <div className="pt-3 text-center text-sm text-ink-light">
         <Link href={`/signup`} className="font-semibold text-gold hover:underline">
-          회원가입 (+3,000P)
+          회원가입 · 첫 박스 할인
         </Link>
         <span className="mx-3 text-border">|</span>
         <a

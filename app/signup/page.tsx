@@ -13,7 +13,7 @@ export default function SignupPage() {
           <img src="/logo-gold.png" alt="Dear Pet" className="mx-auto h-16 w-auto" />
         </Link>
         <h1 className="mt-4 font-serif-kr text-2xl font-bold text-ink">회원가입</h1>
-        <p className="mb-8 mt-2 text-sm text-ink-light">가입하고 첫 박스 3,000P 받기.</p>
+        <p className="mb-8 mt-2 text-sm text-ink-light">가입하고 첫 박스 할인가로 시작하기.</p>
 
         <SignupForm />
 

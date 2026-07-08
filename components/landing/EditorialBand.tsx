@@ -40,7 +40,7 @@ export default function EditorialBand() {
                 <span className="text-gold">✦</span> 국내 소규모 공방 수제 제작
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-gold">✦</span> 반품 → 포인트, 그리고 더 나은 다음 박스
+                <span className="text-gold">✦</span> 반품 → 무료 교체, 그리고 더 나은 다음 박스
               </li>
             </ul>
           </div>
