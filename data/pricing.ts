@@ -19,7 +19,7 @@ export const PLANS: Plan[] = [
     name: "에브리데이",
     tagline: "매일 부담 없이 시작하는 첫 맞춤",
     price: 29000,
-    features: ["우리 아이 맞춤 구성", "알레르기 성분 제외", "월 1회 정기배송"],
+    features: ["우리 아이 맞춤 구성", "알레르기 성분 제외", "월 1회 정기배송", "안 맞은 간식은 포인트 케어"],
     image: {
       id: "photo-1548199973-03cce0bbc87b",
       pos: "center 45%",
@@ -35,7 +35,7 @@ export const PLANS: Plan[] = [
     price: 48000,
     badge: "BEST",
     highlight: true,
-    features: ["동결건조 중심 프리미엄 구성", "프로파일 정밀 반영", "반품 → 포인트 전환"],
+    features: ["에브리데이의 모든 것", "+ 더 풍성하고 다양한 구성", "+ 프로파일 정밀 반영"],
     image: {
       id: "photo-1593134257782-e89567b7718a",
       pos: "center 35%",
@@ -50,7 +50,7 @@ export const PLANS: Plan[] = [
     tagline: "건강 케어까지 더한 프리미엄",
     price: 72000,
     badge: "PREMIUM",
-    features: ["가장 풍성한 구성 + 영양 케어", "전담 큐레이션", "우선 배송·전용 상담"],
+    features: ["시그니처의 모든 것", "+ 영양 케어", "+ 전담 큐레이션 · 우선 배송"],
     image: {
       id: "photo-1591946614720-90a587da4a36",
       pos: "center 30%",
