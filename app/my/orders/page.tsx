@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const ORDERS = [
-  { month: "7월 박스", items: "수제 간식 10종", status: "배송 완료", canReturn: true, tracking: "1234-5678" },
-  { month: "6월 박스", items: "수제 간식 10종", status: "배송 완료", canReturn: false, tracking: "1122-3344" },
+  { month: "7월 박스", items: "맞춤 간식 구성", status: "배송 완료", canReturn: true, tracking: "1234-5678" },
+  { month: "6월 박스", items: "맞춤 간식 구성", status: "배송 완료", canReturn: false, tracking: "1122-3344" },
 ];
 
 export default function OrdersPage() {

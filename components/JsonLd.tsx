@@ -9,7 +9,7 @@ export default function JsonLd() {
       name: "Dear Pet Box",
       url: "https://dearpetbox.co.kr",
       description:
-        "반려견 알레르기와 취향을 분석해 매달 딱 맞는 맞춤 간식 10종을 보내드리는 구독 서비스.",
+        "반려견 알레르기와 취향을 분석해 매달 딱 맞는 맞춤 간식 박스를 보내드리는 구독 서비스.",
     },
     {
       "@context": "https://schema.org",

@@ -37,7 +37,7 @@ export default function EditorialBand() {
                 <span className="text-gold">✦</span> 알레르기 성분 100% 제외
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-gold">✦</span> 국내 소규모 공방 수제 제작
+                <span className="text-gold">✦</span> 성분·원산지 확인한 간식만 선별
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-gold">✦</span> 반품 → 포인트, 그리고 더 나은 다음 박스
