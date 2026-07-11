@@ -24,7 +24,7 @@ export default function MyDashboard() {
           </Link>
         </div>
         <div className="mt-3 flex items-center justify-between border-t border-borderk pt-3 text-sm">
-          <span>7월 박스 · 수제 간식 10종</span>
+          <span>7월 박스 · 맞춤 간식 구성</span>
           <span className="rounded-full bg-leaf px-3 py-1 text-xs text-cream">배송 완료</span>
         </div>
       </div>

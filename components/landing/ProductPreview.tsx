@@ -34,7 +34,7 @@ export default function ProductPreview() {
             aria-label="맞춤 간식을 기다리는 반려견"
           />
           <div className="absolute -bottom-4 -left-3">
-            <StampBadge rotate="left">10종 큐레이션 · 매달 새 구성</StampBadge>
+            <StampBadge rotate="left">맞춤 큐레이션 · 매달 새 구성</StampBadge>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ export default function ProductPreview() {
               </li>
             ))}
             <li className="rounded-full border-2 border-leaf px-4 py-2 text-sm font-medium text-leaf">
-              + 5종 더
+              + 더 다양한 구성
             </li>
           </ul>
 

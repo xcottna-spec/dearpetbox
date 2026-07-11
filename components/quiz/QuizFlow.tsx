@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import ProgressBar from "@/components/ui/ProgressBar";
@@ -9,6 +9,7 @@ import { ALLERGENS } from "@/data/allergens";
 import { BREEDS } from "@/data/breeds";
 import { PLANS } from "@/data/pricing";
 import { TRACK } from "@/lib/analytics";
+import { curate, type Recommendation } from "@/lib/curator";
 
 type Step = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
 const INPUT_STEPS: Step[] = ["A", "B", "C", "D", "E"];
@@ -153,6 +154,26 @@ export default function QuizFlow() {
   };
 
   const selectedPlan = PLANS.find((p) => p.id === state.plan);
+
+  // 규칙 기반 큐레이션 — 프로파일이 준비되는 결과 단계에서만 계산
+  const curation = useMemo(
+    () =>
+      curate({
+        name: state.name,
+        breed: state.breed,
+        ageMonths: state.ageMonths,
+        weight: state.weight,
+        gender: state.gender,
+        allergies: state.allergies,
+        allergyNote: state.allergyNote,
+        noAllergy: state.noAllergy,
+        textures: state.textures,
+        flavors: state.flavors,
+        healthGoals: state.healthGoals,
+        plan: state.plan,
+      }),
+    [state]
+  );
 
   // 결제·주문은 카페24 공식몰에서 진행 (주문 데이터 카페24 집계).
   // 이동 직전 진단 프로파일+연락처를 운영자에게 전송해 주문과 매칭할 수 있게 한다.
@@ -472,6 +493,10 @@ export default function QuizFlow() {
                 {state.breed || "믹스견"} · {Math.floor(state.ageMonths / 12)}살 · {state.weight || "체중 미입력"}
               </ResultRow>
             </div>
+
+            {/* AI 큐레이션 리포트 */}
+            <CurationReport name={name} curation={curation} />
+
             <div className="mt-5 flex items-center justify-center gap-5 text-sm">
               <button
                 onClick={() => go("B")}
@@ -664,6 +689,170 @@ function Nav({
         {nextLabel}
       </Button>
     </div>
+  );
+}
+
+function CurationReport({
+  name,
+  curation,
+}: {
+  name: string;
+  curation: ReturnType<typeof curate>;
+}) {
+  return (
+    <div className="mt-8 text-left">
+      <div className="mb-4 flex items-center justify-center gap-2">
+        <span className="h-px w-8 bg-gold/50" />
+        <span className="font-brand text-xs font-bold uppercase tracking-[0.24em] text-gold">
+          AI Nutrition Report
+        </span>
+        <span className="h-px w-8 bg-gold/50" />
+      </div>
+
+      {/* 건강 상태 분석 */}
+      <ReportBlock title="건강 상태 분석" tag={curation.lifeStageLabel}>
+        <ul className="space-y-1.5">
+          {curation.healthAnalysis.map((line, i) => (
+            <li key={i} className="flex gap-2 text-sm text-ink">
+              <span className="text-gold">•</span>
+              <span className="break-keep">{line}</span>
+            </li>
+          ))}
+        </ul>
+      </ReportBlock>
+
+      {/* 위험 요소 분석 */}
+      <ReportBlock title="위험 요소 분석">
+        <ul className="space-y-1.5">
+          {curation.riskFactors.map((line, i) => (
+            <li key={i} className="flex gap-2 text-sm text-ink">
+              <span className="text-stamp">⚠</span>
+              <span className="break-keep">{line}</span>
+            </li>
+          ))}
+        </ul>
+      </ReportBlock>
+
+      {/* 추천 간식 TOP5 */}
+      <ReportBlock title={`${name} 추천 간식 TOP 5`}>
+        <ol className="space-y-3">
+          {curation.top5.map((rec, i) => (
+            <TreatCard key={rec.treat.id} rank={i + 1} rec={rec} />
+          ))}
+        </ol>
+      </ReportBlock>
+
+      {/* 피해야 할 성분 */}
+      <ReportBlock title="피해야 할 성분">
+        <div className="flex flex-wrap gap-2">
+          {curation.avoidIngredients.map((ing) => (
+            <span
+              key={ing}
+              className="rounded-full border border-stamp/40 bg-stamp/5 px-3 py-1 text-xs font-medium text-stamp"
+            >
+              ✕ {ing}
+            </span>
+          ))}
+        </div>
+      </ReportBlock>
+
+      {/* 대체 상품 제안 */}
+      {curation.alternatives.length > 0 && (
+        <ReportBlock title="대체 상품 제안">
+          <div className="flex flex-wrap gap-2">
+            {curation.alternatives.map((rec) => (
+              <span
+                key={rec.treat.id}
+                className="rounded-full border border-borderk bg-cream px-3 py-1 text-xs text-ink"
+              >
+                {rec.treat.name}{" "}
+                <span className="text-ink-light">{rec.score}%</span>
+              </span>
+            ))}
+          </div>
+        </ReportBlock>
+      )}
+
+      {/* 추천 신뢰도 */}
+      <ReportBlock title="추천 신뢰도">
+        <div className="flex items-center gap-3">
+          <div className="h-2 flex-1 overflow-hidden rounded-full bg-kraft-light">
+            <div
+              className="h-full rounded-full bg-gold transition-all"
+              style={{ width: `${curation.confidence}%` }}
+            />
+          </div>
+          <span className="font-serif-kr text-lg font-bold text-ink">
+            {curation.confidence}
+            <span className="text-xs font-normal text-ink-light">/100</span>
+          </span>
+        </div>
+        <p className="mt-2 text-xs text-ink-light break-keep">
+          프로파일 정보가 자세할수록 신뢰도가 높아져요. 배송 후 피드백으로 다음 추천이 더 정확해져요.
+        </p>
+      </ReportBlock>
+
+      {/* 수의사 상담 권장 */}
+      {curation.vetConsult && (
+        <div className="mt-4 rounded-lg border border-gold/40 bg-gold/5 p-4">
+          <p className="text-sm font-semibold text-ink">🩺 수의사 상담을 권장해요</p>
+          <p className="mt-1 text-sm text-ink-light break-keep">
+            {curation.vetConsultReason}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ReportBlock({
+  title,
+  tag,
+  children,
+}: {
+  title: string;
+  tag?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="mt-4 rounded-lg border-2 border-borderk bg-cream p-5 shadow-kraft-sm">
+      <div className="mb-3 flex items-center justify-between">
+        <h3 className="font-serif-kr text-base font-bold text-ink">{title}</h3>
+        {tag && (
+          <span className="rounded-full bg-ink px-2.5 py-0.5 text-[11px] font-bold text-cream">
+            {tag}
+          </span>
+        )}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function TreatCard({ rank, rec }: { rank: number; rec: Recommendation }) {
+  return (
+    <li className="flex gap-3 rounded-lg border border-borderk bg-parchment/40 p-3">
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold font-brand text-sm font-bold text-cream">
+        {rank}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center justify-between gap-2">
+          <span className="font-semibold text-ink break-keep">{rec.treat.name}</span>
+          <span className="shrink-0 text-xs font-bold text-gold">매칭 {rec.score}%</span>
+        </div>
+        <p className="mt-0.5 text-xs text-ink-light break-keep">{rec.treat.desc}</p>
+        <div className="mt-1.5 flex flex-wrap gap-1">
+          {rec.reasons.map((r, i) => (
+            <span
+              key={i}
+              className="rounded-full bg-leaf/10 px-2 py-0.5 text-[11px] text-leaf break-keep"
+            >
+              {r}
+            </span>
+          ))}
+        </div>
+      </div>
+    </li>
   );
 }
 
