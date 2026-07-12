@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { COMPANY } from "@/data/brand";
 
 export default function Footer() {
   return (
@@ -54,10 +55,12 @@ export default function Footer() {
 
         <div className="mt-12 space-y-1 border-t border-parchment/20 pt-6 text-xs text-parchment/60">
           <p>
-            상호 Dear Pet Box · 대표 나현 · 사업자등록번호 000-00-00000 ·
-            통신판매업신고 0000-지역-0000
+            상호 {COMPANY.legalName} · 대표 {COMPANY.ceo} · 사업자등록번호{" "}
+            {COMPANY.bizNo} · 통신판매업신고 {COMPANY.mailOrderNo}
           </p>
-          <p>주소 경기 용인시 기흥구 · 고객센터 070-0000-0000</p>
+          <p>
+            주소 {COMPANY.address} · 고객센터 {COMPANY.phone} · {COMPANY.email}
+          </p>
           <p className="pt-2">
             <Link href="/privacy" className="underline">
               개인정보처리방침
