@@ -10,23 +10,26 @@ const TERMS = [
     required: true,
     title: "이용약관 동의",
     summary: "구독 신청·배송·포인트·해지 등 서비스 이용 기본 규칙입니다. 법정 청약철회(미개봉 7일)가 보장됩니다.",
+    href: "/terms",
   },
   {
     id: "privacy",
     required: true,
     title: "개인정보 수집·이용 동의",
     summary: "수집: 아이디·휴대폰·배송지·반려견 정보 / 목적: 주문·배송·맞춤 구성 / 보유: 회원 탈퇴 시까지.",
+    href: "/privacy",
   },
   {
     id: "subscription",
     required: true,
     title: "정기결제 안내 동의",
-    summary: "매월 선택한 플랜 금액이 자동 결제됩니다. 다음 배송 3일 전까지 언제든 해지할 수 있습니다.",
+    summary: "매월 선택한 박스 금액이 자동 결제됩니다. 다음 배송 3일 전까지 언제든 해지할 수 있습니다.",
+    href: "/terms",
   },
   {
     id: "marketing",
     required: false,
-    title: "혜택·소식 알림 수신 (선택)",
+    title: "혜택·소식 알림 수신",
     summary: "신제품·포인트 이벤트를 카카오톡/문자로 알려드려요. 언제든 철회 가능합니다.",
   },
 ];
@@ -153,6 +156,16 @@ export default function SignupForm() {
                 <span className="mt-1 block text-xs leading-relaxed text-ink-light">
                   {t.summary}
                 </span>
+                {"href" in t && t.href && (
+                  <Link
+                    href={t.href}
+                    target="_blank"
+                    onClick={(e) => e.stopPropagation()}
+                    className="mt-1 inline-block text-xs font-semibold text-gold underline underline-offset-2"
+                  >
+                    전문 보기
+                  </Link>
+                )}
               </span>
             </label>
           ))}
