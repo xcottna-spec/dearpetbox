@@ -83,16 +83,8 @@ export default function QuizFlow() {
   const [hydrated, setHydrated] = useState(false);
   const [phone, setPhone] = useState("");
   const phoneOk = phone.replace(/[^0-9]/g, "").length >= 10;
-  // 회원 전용 게이트 — null: 확인 중, false: 미로그인
-  const [authed, setAuthed] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    try {
-      setAuthed(Boolean(localStorage.getItem("dpAuth")));
-    } catch {
-      setAuthed(false);
-    }
-  }, []);
+  // 진단은 누구나(비회원 포함) 바로 시작 — 결과 확인 후 회원가입/구매로 유도
 
   // localStorage hydrate + persist
   useEffect(() => {
@@ -210,46 +202,6 @@ export default function QuizFlow() {
       </Link>
     </div>
   );
-
-  // 회원 전용 게이트 — 로그인 전에는 진단 진입 불가
-  if (authed !== true) {
-    return (
-      <main className="min-h-screen bg-parchment px-5 pb-24 pt-8">
-        <div className="mx-auto max-w-xl">
-          {logoHeader}
-          {authed === false && (
-            <section className="border border-gold/50 bg-cream p-8 text-center">
-              <p className="font-brand text-xs font-bold uppercase tracking-[0.28em] text-gold">
-                Members Only
-              </p>
-              <h1 className="mt-3 font-serif-kr text-2xl font-bold text-ink">
-                맞춤 진단은 회원 전용이에요
-              </h1>
-              <p className="mt-3 text-sm text-ink-light">
-                우리 아이 프로파일을 안전하게 보관하고
-                <br />
-                매달 박스에 이어서 반영해 드리기 위해서예요.
-              </p>
-              <div className="mt-7 space-y-3">
-                <Link
-                  href="/login?next=/quiz"
-                  className="block w-full bg-ink py-3.5 font-semibold text-cream transition-colors hover:bg-stamp-hover"
-                >
-                  로그인하고 진단 시작하기
-                </Link>
-                <Link
-                  href="/signup"
-                  className="block w-full border border-border bg-cream py-3.5 font-semibold text-ink"
-                >
-                  3분 만에 회원가입 (+3,000P)
-                </Link>
-              </div>
-            </section>
-          )}
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-parchment px-5 pb-24 pt-8">
