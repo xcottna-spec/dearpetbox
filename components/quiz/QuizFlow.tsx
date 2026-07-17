@@ -85,6 +85,12 @@ export default function QuizFlow() {
   const phoneOk = phone.replace(/[^0-9]/g, "").length >= 10;
 
   // 진단은 누구나(비회원 포함) 바로 시작 — 결과 확인 후 회원가입/구매로 유도
+  const [member, setMember] = useState(false);
+  useEffect(() => {
+    try {
+      setMember(Boolean(localStorage.getItem("dpAuth")));
+    } catch {}
+  }, []);
 
   // localStorage hydrate + persist
   useEffect(() => {
@@ -474,6 +480,25 @@ export default function QuizFlow() {
                 {name} 첫 박스 받아보기
               </Button>
             </div>
+
+            {/* 비회원 → 프로파일 저장(가입) 유도: 무료 진단 퍼널의 전환 고리 */}
+            {!member && (
+              <div className="mt-5 border border-gold/50 bg-cream p-4 text-left">
+                <p className="text-sm font-semibold text-ink">
+                  {name} 프로파일, 저장해 둘까요?
+                </p>
+                <p className="mt-1 break-keep text-xs leading-relaxed text-ink-light">
+                  회원가입하면 프로파일이 계정에 저장되고 마이페이지에서 언제든
+                  수정할 수 있어요. 지금 가입하면 3,000P를 드려요.
+                </p>
+                <Link
+                  href="/signup"
+                  className="mt-3 block w-full border border-borderk bg-kraft-light py-2.5 text-center text-sm font-semibold text-ink transition-colors hover:border-gold"
+                >
+                  가입하고 프로파일 저장하기 (+3,000P)
+                </Link>
+              </div>
+            )}
           </section>
         )}
 
