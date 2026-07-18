@@ -200,6 +200,32 @@ export default function QuizFlow() {
     window.location.href = selectedPlan.cafe24Url;
   };
 
+  // 플랜 선택 후 내부 '주문 확인' 단계를 건너뛰고 바로 카페24 상품 결제로 이동.
+  // 이동 직전 진단 프로파일을 전송해 매칭 자료로 남긴다(연락처는 카페24 주문서에서 수집).
+  const handleGoCafe24 = async () => {
+    if (!selectedPlan) return;
+    setPaying(true);
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: "checkout",
+          name: state.name,
+          plan: selectedPlan.id,
+          planName: selectedPlan.name,
+          breed: state.breed,
+          allergies: state.allergies,
+          allergyNote: state.allergyNote,
+          textures: state.textures,
+          flavors: state.flavors,
+          healthGoals: state.healthGoals,
+        }),
+      });
+    } catch {}
+    window.location.href = selectedPlan.cafe24Url;
+  };
+
   const logoHeader = (
     <div className="mb-8 flex justify-center">
       <Link href="/" aria-label="Dear Pet 홈으로">
@@ -553,7 +579,7 @@ export default function QuizFlow() {
                 </button>
               ))}
             </div>
-            <Nav onBack={() => go("F")} onNext={() => go("H")} nextLabel="결제 단계로" nextOk />
+            <Nav onBack={() => go("F")} onNext={handleGoCafe24} nextLabel="이 박스로 바로 구매하기" nextOk={!!selectedPlan} />
           </section>
         )}
 
