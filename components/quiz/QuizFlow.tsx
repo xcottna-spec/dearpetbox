@@ -10,6 +10,7 @@ import { BREEDS } from "@/data/breeds";
 import { PLANS } from "@/data/pricing";
 import { TRACK } from "@/lib/analytics";
 import { curate, type Recommendation } from "@/lib/curator";
+import { getMemberId, restoreProfileFromServer } from "@/lib/profile-sync";
 
 type Step = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "CAT";
 const INPUT_STEPS: Step[] = ["A", "B", "C", "D", "E"];
@@ -94,16 +95,30 @@ export default function QuizFlow() {
     } catch {}
   }, []);
 
-  // localStorage hydrate + persist
+  // localStorage hydrate + persist (+ 로컬이 비면 계정 프로파일 서버 복원)
   useEffect(() => {
+    let hasLocal = false;
     try {
       const raw = localStorage.getItem("dpQuiz");
-      if (raw) dispatch({ type: "HYDRATE", state: JSON.parse(raw) });
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        hasLocal = Boolean(parsed?.name);
+        dispatch({ type: "HYDRATE", state: parsed });
+      }
       const dn = localStorage.getItem("dogName");
-      if (dn) dispatch({ type: "SET", key: "name", value: dn });
+      if (dn) {
+        hasLocal = true;
+        dispatch({ type: "SET", key: "name", value: dn });
+      }
     } catch {}
     setHydrated(true);
     TRACK.quizStart();
+    // 새 기기·브라우저 변경·저장소 삭제: 회원이면 서버에서 히스토리 복원
+    if (!hasLocal) {
+      restoreProfileFromServer().then((p) => {
+        if (p) dispatch({ type: "HYDRATE", state: p as Partial<QuizState> });
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -207,6 +222,7 @@ export default function QuizFlow() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           event: "checkout",
+          userId: getMemberId(),
           name: state.name,
           phone,
           plan: selectedPlan.id,
