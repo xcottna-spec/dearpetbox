@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 // 약관(1단계) → 정보 입력(2단계) → 필수값 검증 후 가입
@@ -56,6 +56,14 @@ export default function SignupForm() {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [done, setDone] = useState(false);
+
+  // 진단을 먼저 한 게스트의 아이 이름을 그대로 이어받는다 (이중 입력·불일치 방지)
+  useEffect(() => {
+    try {
+      const dn = localStorage.getItem("dogName");
+      if (dn) setF((p) => (p.dogName ? p : { ...p, dogName: dn }));
+    } catch {}
+  }, []);
 
   const requiredOk = TERMS.filter((t) => t.required).every((t) =>
     agreed.includes(t.id)
@@ -231,9 +239,26 @@ export default function SignupForm() {
               onClick={() => {
                 if (!validate()) return;
                 try {
-                  // 가입 즉시 로그인 상태 부여 → 맞춤 진단 게이트 통과
+                  // 가입 즉시 로그인 상태 부여
                   localStorage.setItem("dpAuth", f.userId.trim());
                   if (f.dogName.trim()) localStorage.setItem("dogName", f.dogName.trim());
+                  // 프로파일을 계정(userId)·휴대폰과 함께 서버에 저장 —
+                  // 브라우저가 바뀌어도 히스토리가 초기화되지 않는 근거 데이터
+                  const quiz = JSON.parse(localStorage.getItem("dpQuiz") || "{}");
+                  fetch("/api/lead", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      ...quiz,
+                      step: undefined,
+                      event: "signup",
+                      userId: f.userId.trim(),
+                      ownerName: f.ownerName.trim(),
+                      phone: f.phone.trim(),
+                      name: f.dogName.trim() || quiz.name,
+                      marketingOptIn: agreed.includes("marketing"),
+                    }),
+                  }).catch(() => {});
                 } catch {}
                 setDone(true);
               }}

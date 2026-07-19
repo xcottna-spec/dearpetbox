@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ALLERGENS } from "@/data/allergens";
+import { restoreProfileFromServer } from "@/lib/profile-sync";
 
 // 마이페이지 프로파일 — 진단(dpQuiz)과 동일한 데이터를 읽는다.
 // 수정은 진단 플로우(/quiz)를 재사용: 같은 저장소를 쓰므로 별도 편집 UI가 필요 없다.
@@ -25,11 +26,20 @@ export default function ProfilePage() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("dpQuiz");
-      if (raw) setQ(JSON.parse(raw));
-    } catch {}
-    setLoaded(true);
+    (async () => {
+      let local: QuizData | null = null;
+      try {
+        const raw = localStorage.getItem("dpQuiz");
+        if (raw) local = JSON.parse(raw);
+      } catch {}
+      // 로컬이 비어 있으면(새 기기·저장소 삭제) 계정 프로파일 서버 복원
+      if (!local?.name) {
+        const p = await restoreProfileFromServer();
+        if (p) local = p as QuizData;
+      }
+      setQ(local);
+      setLoaded(true);
+    })();
   }, []);
 
   if (!loaded) return null;
