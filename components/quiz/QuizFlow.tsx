@@ -11,11 +11,12 @@ import { PLANS } from "@/data/pricing";
 import { TRACK } from "@/lib/analytics";
 import { curate, type Recommendation } from "@/lib/curator";
 
-type Step = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
+type Step = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "CAT";
 const INPUT_STEPS: Step[] = ["A", "B", "C", "D", "E"];
 
 interface QuizState {
   step: Step;
+  species: "dog" | "cat";
   name: string;
   breed: string;
   ageMonths: number;
@@ -32,6 +33,7 @@ interface QuizState {
 
 const initialState: QuizState = {
   step: "A",
+  species: "dog",
   name: "",
   breed: "",
   ageMonths: 24,
@@ -173,6 +175,27 @@ export default function QuizFlow() {
     [state]
   );
 
+  // 고양이 대기명단 — 박스 오픈 전 수요·프로파일 수집 (데이터 자산)
+  const [catDone, setCatDone] = useState(false);
+  const submitCatWaitlist = async () => {
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: "cat_waitlist",
+          species: "cat",
+          name: state.name,
+          breed: state.breed,
+          ageMonths: state.ageMonths,
+          note: state.allergyNote,
+          phone,
+        }),
+      });
+    } catch {}
+    setCatDone(true);
+  };
+
   // 결제·주문은 카페24 공식몰에서 진행 (주문 데이터 카페24 집계).
   // 이동 직전 진단 프로파일+연락처를 운영자에게 전송해 주문과 매칭할 수 있게 한다.
   const handleCheckout = async () => {
@@ -230,7 +253,16 @@ export default function QuizFlow() {
             <h1 className="font-serif-kr text-2xl font-bold text-ink">
               우리 아이 맞춤 진단을 시작할게요
             </h1>
-            <p className="mt-2 text-ink-light">아이의 이름을 알려주세요.</p>
+            <p className="mt-2 text-ink-light">어떤 아이인가요?</p>
+            <div className="mt-4 flex gap-2">
+              <Chip active={state.species === "dog"} onClick={() => set("species", "dog")}>
+                🐶 강아지
+              </Chip>
+              <Chip active={state.species === "cat"} onClick={() => set("species", "cat")}>
+                🐱 고양이
+              </Chip>
+            </div>
+            <p className="mt-5 text-ink-light">아이의 이름을 알려주세요.</p>
             <input
               autoFocus
               value={state.name}
@@ -239,10 +271,100 @@ export default function QuizFlow() {
               className="mt-6 w-full rounded-lg border-2 border-borderk bg-cream px-4 py-3 text-lg outline-none focus:border-stamp"
             />
             <div className="mt-8">
-              <Button onClick={() => go("B")} withArrow disabled={!state.name.trim()}>
+              <Button
+                onClick={() => go(state.species === "cat" ? "CAT" : "B")}
+                withArrow
+                disabled={!state.name.trim()}
+              >
                 {state.name.trim() ? `${name} 진단 시작하기` : "이름을 입력해주세요"}
               </Button>
             </div>
+          </section>
+        )}
+
+        {/* STEP CAT — 고양이 대기명단 (박스 오픈 전 수요·프로파일 수집) */}
+        {state.step === "CAT" && (
+          <section>
+            {!catDone ? (
+              <>
+                <StampBadge>Coming Soon</StampBadge>
+                <h1 className="mt-4 font-serif-kr text-2xl font-bold text-ink">
+                  고양이 박스, 준비하고 있어요
+                </h1>
+                <p className="mt-3 break-keep text-ink-light">
+                  지금은 강아지 박스를 먼저 운영하고 있어요. {name}의 정보를
+                  남겨주시면 고양이 박스가 열릴 때 가장 먼저 알려드릴게요.
+                  가입 혜택 3,000P도 그대로 받으실 수 있어요.
+                </p>
+                <label className="mt-6 block text-sm font-semibold text-ink">묘종</label>
+                <input
+                  value={state.breed}
+                  onChange={(e) => set("breed", e.target.value)}
+                  placeholder="예: 코리안숏헤어"
+                  className="mt-2 w-full rounded-lg border-2 border-borderk bg-cream px-4 py-3 outline-none focus:border-stamp"
+                />
+                <label className="mt-5 block text-sm font-semibold text-ink">
+                  나이: {Math.floor(state.ageMonths / 12)}살 {state.ageMonths % 12}개월
+                </label>
+                <input
+                  type="range"
+                  min={0}
+                  max={240}
+                  value={state.ageMonths}
+                  onChange={(e) => set("ageMonths", Number(e.target.value))}
+                  className="mt-2 w-full accent-stamp"
+                />
+                <label className="mt-5 block text-sm font-semibold text-ink">
+                  알레르기·특이사항 <span className="font-normal text-ink-light">(선택)</span>
+                </label>
+                <textarea
+                  value={state.allergyNote}
+                  onChange={(e) => set("allergyNote", e.target.value)}
+                  rows={2}
+                  placeholder="예: 닭고기 간식에 구토 / 습식만 먹어요"
+                  className="mt-2 w-full resize-none rounded-lg border-2 border-borderk bg-cream px-4 py-3 text-sm outline-none focus:border-stamp"
+                />
+                <label className="mt-5 block text-sm font-semibold text-ink">
+                  휴대폰 번호 <span className="text-gold">*</span>
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="010-0000-0000 (오픈 알림용)"
+                  className="mt-2 w-full rounded-lg border-2 border-borderk bg-cream px-4 py-3 outline-none focus:border-stamp"
+                />
+                <div className="mt-8">
+                  <Button fullWidth withArrow disabled={!phoneOk} onClick={submitCatWaitlist}>
+                    오픈 알림 신청하기
+                  </Button>
+                </div>
+                <button
+                  onClick={() => {
+                    set("species", "dog");
+                    go("A");
+                  }}
+                  className="mt-4 w-full text-sm text-ink-light underline"
+                >
+                  ← 강아지 진단으로 돌아가기
+                </button>
+              </>
+            ) : (
+              <div className="text-center">
+                <StampBadge>신청 완료</StampBadge>
+                <h1 className="mt-4 font-serif-kr text-2xl font-bold text-ink">
+                  {name}, 가장 먼저 만나요
+                </h1>
+                <p className="mt-3 break-keep text-ink-light">
+                  고양이 박스가 열리면 남겨주신 번호로 가장 먼저 알려드릴게요.
+                </p>
+                <div className="mt-7">
+                  <Button href="/" withArrow>
+                    디어펫 둘러보기
+                  </Button>
+                </div>
+              </div>
+            )}
           </section>
         )}
 
